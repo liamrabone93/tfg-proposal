@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milo × Tickets for Good — Proposal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:        #F02D7D;
+      --pink-deep:   #C41E62;
+      --pink-light:  #FF6BA8;
+      --pink-faint:  #FFF0F6;
+      --pink-pale:   #FDE8F2;
+      --ink:         #1A1A2E;
+      --ink-soft:    #4A4A6A;
+      --ink-mute:    #8080A0;
+      --rule:        #EDE8F0;
+      --white:       #FFFFFF;
+      --page-bg:     #FAF7FB;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 4px 40px rgba(0,0,0,.08);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--ink);
+      color: var(--white);
+      padding: 52px 64px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,45,125,.45) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 100px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,168,.2) 0%, transparent 70%);
+    }
+    .hero-meta {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 span { color: var(--pink-light); }
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,.72);
+      max-width: 540px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .badge {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: .73rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.88);
+    }
+
+    /* ── ABOUT YOU BAR ── */
+    .about-bar {
+      background: var(--pink-faint);
+      border-bottom: 1px solid rgba(240,45,125,.12);
+      padding: 28px 64px;
+    }
+    .about-bar-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 16px;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .about-stat {
+      padding-right: 20px;
+    }
+    .about-stat + .about-stat {
+      padding-left: 20px;
+      border-left: 1px solid rgba(240,45,125,.2);
+    }
+    .about-stat-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--pink);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .about-stat-label {
+      font-size: .75rem;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+
+    /* ── Sections ── */
+    section { padding: 44px 64px; }
+    section + section { border-top: 1px solid var(--rule); }
+
+    .section-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .section-intro {
+      font-size: .93rem;
+      color: var(--ink-soft);
+      max-width: 600px;
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+
+    /* ── Challenge cards ── */
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .challenge-card {
+      background: var(--page-bg);
+      border-radius: 10px;
+      padding: 18px 20px;
+      border-left: 3px solid var(--pink);
+    }
+    .challenge-card h4 {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+    .challenge-card p {
+      font-size: .81rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* ── Pull quote ── */
+    .pull-quote {
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 22px 26px;
+      margin-top: 20px;
+    }
+    .pull-quote p {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: .98rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: rgba(255,255,255,.9);
+    }
+    .pull-quote p em { color: var(--pink-light); font-style: normal; font-weight: 600; }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      background: var(--pink);
+      padding: 32px 64px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .stat-item {
+      text-align: center;
+      color: var(--white);
+      padding: 0 20px;
+    }
+    .stat-item + .stat-item {
+      border-left: 1px solid rgba(255,255,255,.25);
+    }
+    .stat-number {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.3rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-size: .77rem;
+      color: rgba(255,255,255,.8);
+      font-weight: 500;
+    }
+
+    /* ── Fit points ── */
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .fit-card {
+      border: 1.5px solid var(--rule);
+      border-radius: 10px;
+      padding: 18px 20px;
+      transition: border-color .15s;
+    }
+    .fit-card:hover { border-color: var(--pink-light); }
+    .fit-card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .fit-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: var(--pink);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .fit-card h4 {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .fit-card p {
+      font-size: .81rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* ── Use case ── */
+    .usecase-box {
+      background: var(--pink-faint);
+      border: 1px solid rgba(240,45,125,.15);
+      border-radius: 12px;
+      padding: 26px 30px;
+    }
+    .usecase-box-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--pink-deep);
+      margin-bottom: 18px;
+    }
+    .usecase-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 13px;
+      align-items: flex-start;
+    }
+    .usecase-item:last-child { margin-bottom: 0; }
+    .usecase-q {
+      background: var(--pink);
+      color: var(--white);
+      font-size: .67rem;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 3px 8px;
+      white-space: nowrap;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .usecase-item p {
+      font-size: .85rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* ── Integration logos ── */
+    .integration-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+    .integration-pill {
+      background: var(--page-bg);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      padding: 6px 15px;
+      font-size: .79rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+    .integration-pill.highlight {
+      border-color: var(--pink);
+      color: var(--pink-deep);
+      background: var(--pink-faint);
+    }
+    .integration-note {
+      font-size: .78rem;
+      color: var(--ink-mute);
+      margin-top: 12px;
+    }
+
+    /* ── Two-col ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; }
+    .step { display: flex; gap: 14px; position: relative; }
+    .step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 34px;
+      width: 1px; height: calc(100% + 4px);
+      background: var(--rule);
+    }
+    .step-num {
+      width: 31px; height: 31px;
+      border-radius: 50%;
+      background: var(--pink);
+      color: var(--white);
+      font-size: .78rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .step-body { padding-bottom: 22px; }
+    .step-body h4 { font-size: .88rem; font-weight: 700; margin-bottom: 3px; }
+    .step-body p { font-size: .81rem; color: var(--ink-soft); line-height: 1.55; }
+
+    /* ── Pricing ── */
+    .pricing-card {
+      border: 1.5px solid var(--rule);
+      border-radius: 12px;
+      padding: 24px 22px;
+      margin-bottom: 14px;
+    }
+    .pricing-card:last-child { margin-bottom: 0; }
+    .pricing-card.featured {
+      border-color: var(--pink);
+      background: var(--pink-faint);
+      position: relative;
+    }
+    .featured-tag {
+      position: absolute;
+      top: -11px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--pink);
+      color: var(--white);
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 3px 12px;
+      white-space: nowrap;
+    }
+    .pricing-card h4 {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 6px;
+    }
+    .pricing-card .price {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--pink);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .pricing-card .price-note {
+      font-size: .76rem;
+      color: var(--ink-mute);
+      margin-bottom: 16px;
+    }
+    .pricing-card ul { list-style: none; }
+    .pricing-card ul li {
+      font-size: .81rem;
+      color: var(--ink-soft);
+      padding: 4px 0;
+      border-top: 1px solid rgba(0,0,0,.06);
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .pricing-card ul li::before {
+      content: '✓';
+      color: var(--pink);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .deduct-note {
+      font-size: .77rem;
+      color: var(--ink-soft);
+      background: var(--pink-pale);
+      border: 1px solid rgba(240,45,125,.2);
+      border-radius: 8px;
+      padding: 9px 13px;
+      margin-top: 12px;
+    }
+    .deduct-note strong { color: var(--pink-deep); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--pink-deep) 0%, var(--pink) 55%, var(--pink-light) 100%);
+      color: var(--white);
+      padding: 48px 64px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.85rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .cta-section > p {
+      font-size: .93rem;
+      color: rgba(255,255,255,.88);
+      max-width: 500px;
+      margin: 0 auto 26px;
+      line-height: 1.6;
+    }
+    .cta-next-steps {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .cta-step {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: .82rem;
+      color: rgba(255,255,255,.95);
+      max-width: 185px;
+      text-align: left;
+    }
+    .cta-step span {
+      display: block;
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 5px;
+    }
+    .contact-line {
+      font-size: .83rem;
+      color: rgba(255,255,255,.7);
+    }
+    .contact-line a {
+      color: var(--white);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; }
+    }
+
+    @media (max-width: 680px) {
+      .hero, section, .stats-bar, .about-bar, .cta-section { padding-left: 28px; padding-right: 28px; }
+      .hero h1 { font-size: 2rem; }
+      .challenge-grid, .fit-grid, .two-col { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .about-stat + .about-stat { border-left: none; padding-left: 0; }
+      .stats-bar { grid-template-columns: 1fr; gap: 20px; }
+      .stat-item + .stat-item { border-left: none; border-top: 1px solid rgba(255,255,255,.25); padding-top: 16px; }
+      .cta-next-steps { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-meta">Confidential Proposal · May 2026</div>
+    <h1>Milo <span>×</span> Tickets&nbsp;for&nbsp;Good</h1>
+    <p class="hero-sub">
+      You're scaling a mission-critical platform across six markets, with data flowing in from partner APIs, member verification systems, CRMs, and impact measurement tools. Milo turns all of it into instant answers — in plain English, for anyone on your team.
+    </p>
+    <div class="hero-badges">
+      <span class="badge">UK · Netherlands · Belgium · Germany · USA</span>
+      <span class="badge">POC in 2–4 weeks</span>
+      <span class="badge">500+ pre-built integrations</span>
+    </div>
+  </header>
+
+  <!-- ABOUT YOU -->
+  <div class="about-bar">
+    <div class="about-bar-label">We know your business</div>
+    <div class="about-stats">
+      <div class="about-stat">
+        <div class="about-stat-num">650k+</div>
+        <div class="about-stat-label">Verified members globally</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">1,200+</div>
+        <div class="about-stat-label">Event partners</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">1M+</div>
+        <div class="about-stat-label">Tickets distributed</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">6</div>
+        <div class="about-stat-label">Markets &amp; growing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHALLENGE -->
+  <section>
+    <div class="section-label">The Challenge</div>
+    <h2 class="section-title">Fast growth across six markets means data everywhere</h2>
+    <p class="section-intro">
+      TfG is scaling across multiple markets with separate member bases, partner APIs, verification flows, and country-level operations. Getting a unified answer requires pulling from multiple sources — and building a spreadsheet.
+    </p>
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <h4>Multi-market data sprawl</h4>
+        <p>UK, US, NL, BE, DE — each with its own member base, partner network, and regulatory context. Cross-market views currently mean manual consolidation.</p>
+      </div>
+      <div class="challenge-card">
+        <h4>Partner API complexity</h4>
+        <p>With AXS live and more integrations coming (Ticketmaster, Fandango), inventory data flows in from more directions with no unified query layer across it.</p>
+      </div>
+      <div class="challenge-card">
+        <h4>Impact reporting at scale</h4>
+        <p>Wellbeing surveys, university studies, partner CSR outputs — proving social impact with data rather than anecdotes requires someone to build a deck every time.</p>
+      </div>
+      <div class="challenge-card">
+        <h4>Partner reporting overhead</h4>
+        <p>With 1,200+ event partners, reporting on allocation, uptake, attendance, and on-site value is a manual or semi-manual process at every reporting cycle.</p>
+      </div>
+    </div>
+    <div class="pull-quote">
+      <p>"What's our uptake rate for NHS members at music events in the North West vs. charity workers at theatre in London?" — <em>currently, that question requires someone to pull from multiple sources and build a spreadsheet. Milo answers it in seconds.</em></p>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Pre-built data integrations</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2–4 wks</div>
+      <div class="stat-label">Proof of concept timeline</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">Plain&nbsp;English</div>
+      <div class="stat-label">No SQL. No analysts. No waiting.</div>
+    </div>
+  </div>
+
+  <!-- WHY MILO FITS -->
+  <section>
+    <div class="section-label">The Solution</div>
+    <h2 class="section-title">Milo is built for exactly this</h2>
+    <p class="section-intro">
+      Milo connects to every tool you already use and lets anyone on your team ask questions in plain English — getting the answer, the <em>why</em>, and what to do next.
+    </p>
+    <div class="fit-grid">
+      <div class="fit-card">
+        <div class="fit-card-top">
+          <div class="fit-icon">🌍</div>
+          <h4>One view across all six markets</h4>
+        </div>
+        <p>Milo connects to your existing systems and lets anyone ask cross-market questions without manual consolidation — UK vs US, NHS vs charity workers, music vs theatre.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-card-top">
+          <div class="fit-icon">❤️</div>
+          <h4>Impact measurement, instantly</h4>
+        </div>
+        <p>Query wellbeing data, partner feedback, and member outcomes without waiting for a report — so your team can prove social impact at any time, for any audience.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-card-top">
+          <div class="fit-icon">🤝</div>
+          <h4>Partner reporting, automated</h4>
+        </div>
+        <p>See which partners are active, which have dropped off, allocation volumes, uptake trends, and on-site value — without a manual pull. Keep 1,200+ partners informed at scale.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-card-top">
+          <div class="fit-icon">⚡</div>
+          <h4>No data team required</h4>
+        </div>
+        <p>As you scale internationally, Milo removes the dependency on dedicated analysts entirely. Steve, Paul, Philip — any team member can query any data source directly.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-card-top">
+          <div class="fit-icon">🔗</div>
+          <h4>Single layer across all partner APIs</h4>
+        </div>
+        <p>AXS is live. Ticketmaster and Fandango are coming. Milo sits across every API integration as a single query layer — no matter how many data sources you add.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-card-top">
+          <div class="fit-icon">📱</div>
+          <h4>Available wherever your team works</h4>
+        </div>
+        <p>Web, mobile, or WhatsApp. Insights reach the right person whether they're in the office, at a venue, or at a festival — no login to a dashboard required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section style="padding-top: 0;">
+    <div class="usecase-box">
+      <div class="usecase-box-label">Questions Milo could answer for Tickets for Good — today</div>
+      <div class="usecase-item">
+        <span class="usecase-q">Ask</span>
+        <p>"What's our ticket uptake rate by member category across the UK vs US this quarter?"</p>
+      </div>
+      <div class="usecase-item">
+        <span class="usecase-q">Ask</span>
+        <p>"Which event partners have the highest no-show rates, and what's the trend over the last 6 months?"</p>
+      </div>
+      <div class="usecase-item">
+        <span class="usecase-q">Ask</span>
+        <p>"What's our social impact score by region and how has it changed since the AXS integration went live?"</p>
+      </div>
+      <div class="usecase-item">
+        <span class="usecase-q">Ask</span>
+        <p>"Show me the top 10 event partners by allocation volume who haven't donated tickets in the last 90 days."</p>
+      </div>
+      <div class="usecase-item">
+        <span class="usecase-q">Ask</span>
+        <p>"Which marketing channels drove the most new member sign-ups in Q1 2026?"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section>
+    <div class="section-label">Integrations</div>
+    <h2 class="section-title">Connects to everything you already use</h2>
+    <p class="section-intro">
+      500–700 pre-built connectors mean your existing stack is ready on day one. Custom API builds for your proprietary platform are included in the proof of concept.
+    </p>
+    <div class="integration-list">
+      <span class="integration-pill highlight">Salesforce</span>
+      <span class="integration-pill highlight">Zendesk</span>
+      <span class="integration-pill highlight">Google Suite</span>
+      <span class="integration-pill highlight">AXS API</span>
+      <span class="integration-pill highlight">Ruby on Rails Platform</span>
+      <span class="integration-pill">Ticketmaster</span>
+      <span class="integration-pill">Fandango</span>
+      <span class="integration-pill">Stripe</span>
+      <span class="integration-pill">Slack / Teams / WhatsApp</span>
+      <span class="integration-pill">HubSpot</span>
+      <span class="integration-pill">BigQuery</span>
+      <span class="integration-pill">+ 500 more</span>
+    </div>
+    <p class="integration-note">&#9679; Highlighted integrations are directly relevant to your current stack and partner infrastructure.</p>
+  </section>
+
+  <!-- PROCESS + PRICING -->
+  <section>
+    <div class="two-col">
+
+      <div>
+        <div class="section-label">Proof of Concept</div>
+        <h2 class="section-title">Live in weeks,<br>not months</h2>
+        <p class="section-intro" style="margin-bottom: 22px;">A structured, low-risk path from first conversation to full team adoption.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Kick-off &amp; integration setup</h4>
+              <p>We connect Salesforce, Zendesk, Google Suite, AXS, and your platform. No heavy lifting from your team.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Custom dashboards &amp; queries</h4>
+              <p>We build views for impact reporting, partner management, and cross-market analysis — tailored to Paul, Philip, and the wider team.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Training &amp; handover</h4>
+              <p>In-person or online training. Concierge support via Slack, Teams, or WhatsApp from day one.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Investment</div>
+        <h2 class="section-title">Pricing</h2>
+        <p class="section-intro" style="margin-bottom: 18px;">Start with a proof of concept — zero long-term commitment required.</p>
+
+        <div class="pricing-card featured">
+          <span class="featured-tag">Recommended First Step</span>
+          <h4>Proof of Concept</h4>
+          <div class="price">£1,500</div>
+          <div class="price-note">One-off · 2–4 weeks</div>
+          <ul>
+            <li>All data source &amp; API integrations</li>
+            <li>Custom builds for your platform if required</li>
+            <li>Tailored dashboards for impact, partners &amp; ops</li>
+            <li>In-person or online training</li>
+            <li>Concierge support via Slack / WhatsApp</li>
+          </ul>
+          <div class="deduct-note"><strong>Full £1,500 deducted</strong> from the annual fee if you proceed after the POC.</div>
+        </div>
+
+        <div class="pricing-card">
+          <h4>Annual Platform</h4>
+          <div class="price" style="font-size: 1.35rem;">Custom</div>
+          <div class="price-note">Tailored to team size &amp; markets</div>
+          <ul>
+            <li>Unlimited queries &amp; users</li>
+            <li>All markets included</li>
+            <li>Ongoing integration updates</li>
+            <li>Dedicated account management</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Ready to see it with your data?</h2>
+    <p>Join the proof of concept and have Milo running across your Salesforce, AXS, Zendesk, and platform data within weeks — with answers in plain English from day one.</p>
+    <div class="cta-next-steps">
+      <div class="cta-step">
+        <span>Step 1</span>
+        Align with Paul (Data &amp; Insights) and Philip (Strategy) on the top questions to answer first
+      </div>
+      <div class="cta-step">
+        <span>Step 2</span>
+        Confirm POC scope — we handle the integrations, typically within 5 working days of sign-off
+      </div>
+      <div class="cta-step">
+        <span>Step 3</span>
+        Your team gets answers in plain English. No new tools, no SQL, no waiting for a report
+      </div>
+    </div>
+    <p class="contact-line">
+      Questions? Reach Liam at <a href="mailto:liam@milo.ai">liam@milo.ai</a> &nbsp;·&nbsp; Confidential — prepared exclusively for Tickets for Good
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
